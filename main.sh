@@ -22,7 +22,9 @@ typeset -r color_scripts=($(/usr/bin/ls $color_scripts_dir))
 
 # No need to explain.. Or not
 typeset -ri total_scripts=$(/usr/bin/ls $color_scripts_dir | wc -l )
-typeset -ri random_index=$[ $RANDOM % $total_scripts + 1 ]
+[ ! $total_scripts -gt 0 ] && echo "$color_scripts_dir directory is empty" && exit 1
+
+typeset -ri random_index=$[ $RANDOM % $total_scripts ]
 typeset -r selected_script=${color_scripts[$random_index]}
 
 # Display script name and execute it
